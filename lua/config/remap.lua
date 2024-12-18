@@ -18,3 +18,18 @@ vim.keymap.set('n', '<leader>u', function() vim.cmd.Telescope('undo') end, { des
 -- vim-fugitive (git)
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status"})
 vim.keymap.set("n", "<leader>gl", function() vim.cmd.Git('log --oneline') end, {desc = "Git log oneline"})
+
+--add text obj
+local delimiters = {'<bar>'}
+
+-- for _,d in ipairs(delimiters) do
+-- 	vim.keymap.set('x', 'i' .. d, ':<C-u>norm! T' .. d .. 'vt' .. d .. '<CR>')
+-- 	vim.keymap.set('o', 'i' .. d, ':norm vi' .. d .. '<CR>')
+-- 	vim.keymap.set('x', 'a' .. d, ':<C-u>norm! F' .. d .. 'vf' .. d .. '<CR>')
+-- 	vim.keymap.set('o', 'a' .. d, ':norm va' .. d .. '<CR>')
+-- end
+
+vim.keymap.set("v", "J", ":m '>..1<CR>gv=gv", { desc = 'Move selected' })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move selected' })
+
+vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
