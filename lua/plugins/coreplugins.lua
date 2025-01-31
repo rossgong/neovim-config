@@ -10,13 +10,6 @@ return {
 		end
 	},
 	{
-		"blazkowolf/gruber-darker.nvim",
-		priority = 1000,
-		config = function()
-			require("gruber-darker").load()
-		end
-	},
-	{
 		'nvim-treesitter/nvim-treesitter',
 		build = ":TSUpdate",
 		config = function()
