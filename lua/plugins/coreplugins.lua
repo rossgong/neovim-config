@@ -6,7 +6,14 @@ return {
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require('nordic').load()
+			-- require('nordic').load()
+		end
+	},
+	{
+		"blazkowolf/gruber-darker.nvim",
+		priority = 1000,
+		config = function()
+			require("gruber-darker").load()
 		end
 	},
 	{
@@ -16,10 +23,11 @@ return {
 			local configs = require("nvim-treesitter.configs")
 
 			configs.setup({
-			  ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "zig", "javascript", "html", "java", "kotlin" },
-			  sync_install = false,
-			  highlight = { enable = true },
-			  indent = { enable = true },  
+				ensure_installed = { "c", "lua", "vim", "vimdoc", "query", "zig", "javascript", "html", "java", "kotlin", "go" },
+				auto_install = true,
+				sync_install = false,
+				highlight = { enable = true },
+				indent = { enable = true },
 			})
 		end
 	},
@@ -28,6 +36,22 @@ return {
 		dependencies = { 'nvim-tree/nvim-web-devicons' },
 		config = function()
 			require('lualine').setup()
-		end	
+		end
+	},
+	{
+		'echasnovski/mini.ai',
+		config = function()
+			local delimiters = { '|' }
+			local delimit_objects = {}
+
+			for _, char in ipairs(delimiters) do
+				delimit_objects[char] = require('mini.ai').gen_spec.pair(char, char, { type = 'greedy' })
+			end
+
+			require('mini.ai').setup({
+				custom_textobjects = delimit_objects
+			})
+		end
+
 	}
 }

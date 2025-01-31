@@ -2,7 +2,7 @@
 
 vim.g.mapleader = " "
 
-vim.keymap.set("n", "<leader>p", vim.cmd.Ex)
+vim.keymap.set("n", "<leader>p", "<cmd>Oil .<CR>")
 
 --telescope suggested default keybinds
 local builtin = require('telescope.builtin')
@@ -13,23 +13,32 @@ vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help ta
 vim.keymap.set('n', '<leader>fs', function()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") });
 end, { desc = 'Telescope project grep search' })
-vim.keymap.set('n', '<leader>u', function() vim.cmd.Telescope('undo') end, { desc = "Telescope undo"})
+vim.keymap.set('n', '<leader>u', function() vim.cmd.Telescope('undo') end, { desc = "Telescope undo" })
 
 -- vim-fugitive (git)
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status"})
-vim.keymap.set("n", "<leader>gl", function() vim.cmd.Git('log --oneline') end, {desc = "Git log oneline"})
-
---add text obj
-local delimiters = {'<bar>'}
-
--- for _,d in ipairs(delimiters) do
--- 	vim.keymap.set('x', 'i' .. d, ':<C-u>norm! T' .. d .. 'vt' .. d .. '<CR>')
--- 	vim.keymap.set('o', 'i' .. d, ':norm vi' .. d .. '<CR>')
--- 	vim.keymap.set('x', 'a' .. d, ':<C-u>norm! F' .. d .. 'vf' .. d .. '<CR>')
--- 	vim.keymap.set('o', 'a' .. d, ':norm va' .. d .. '<CR>')
--- end
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status" })
+vim.keymap.set("n", "<leader>gl", function() vim.cmd.Git('log --oneline') end, { desc = "Git log oneline" })
 
 vim.keymap.set("v", "J", ":m '>..1<CR>gv=gv", { desc = 'Move selected' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move selected' })
 
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
+vim.keymap.set("n", "<leader>h", vim.lsp.buf.hover)
+
+-- Text objects
+-- local delimters = { '@' }
+--
+-- for _, char in ipairs(delimters) do
+-- 	local imap = string.format(':<C-u>normal! /%s<CR>:nohl<CR>T%svt%s<CR>', char, char, char);
+--
+-- 	vim.keymap.set('x', "i" .. char, imap, {
+-- 		noremap = true,
+-- 		silent = true,
+-- 		desc = string.format('between %s text object', char)
+-- 	})
+-- 	vim.keymap.set('o', "i" .. char, imap, {
+-- 		noremap = true,
+-- 		silent = true,
+-- 		desc = string.format('between %s text object', char)
+-- 	})
+-- end

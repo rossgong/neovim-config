@@ -3,11 +3,13 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 0
 vim.opt.smartindent = true
 
+-- blinking edit cursor
 local blink = "blinkwait1000-blinkon1000-blinkoff1000"
 
 vim.opt.guicursor = string.format("n-v-c-sm:block,i-ci-ve:block-%s,r-cr-o:hor20-%s", blink, blink)
 
 vim.opt.number = true
+vim.opt.relativenumber = true
 
 vim.opt.wrap = false
 
@@ -25,6 +27,4 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
-
-vim.cmd.colorscheme('nordic')
-
+vim.cmd.colorscheme('gruber-darker')
