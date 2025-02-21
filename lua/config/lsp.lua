@@ -10,7 +10,6 @@ lspconfig_defaults.capabilities = vim.tbl_deep_extend(
 	lspconfig_defaults.capabilities,
 	require('cmp_nvim_lsp').default_capabilities()
 )
-
 -- This is where you enable features that only work
 -- if there is a language server active in the file
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -61,9 +60,14 @@ cmp.setup({
 	mapping = cmp.mapping.preset.insert({
 		-- `Enter` key to confirm completion
 		['<CR>'] = cmp.mapping.confirm({ select = false }),
+		['<C-CR>'] = cmp.mapping.confirm({ select = true }),
 
 		-- Ctrl+Space to trigger completion menu
 		['<C-Space>'] = cmp.mapping.complete(),
+
+		['<C-j>'] = cmp.mapping(cmp.mapping.select_next_item(), { 'i', 'c' }),
+		['<C-k>'] = cmp.mapping(cmp.mapping.select_prev_item(), { 'i', 'c' }),
+
 
 		-- Scroll up and down in the completion documentation
 		['<C-u>'] = cmp.mapping.scroll_docs(-4),
