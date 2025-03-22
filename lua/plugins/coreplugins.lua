@@ -47,5 +47,5 @@ return {
 		end
 
 	},
-	{ 'ThePrimeagen/vim-be-good' }
+	{ 'tpope/vim-surround' }
 }
