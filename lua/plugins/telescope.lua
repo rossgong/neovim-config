@@ -1,7 +1,7 @@
 return {
 	{
 		'nvim-telescope/telescope.nvim',
-		tag = '0.1.8',
+		tag = 'v0.2.0',
 		dependencies = { 'nvim-lua/plenary.nvim', 'debugloop/telescope-undo.nvim', "nvim-telescope/telescope-ui-select.nvim" },
 		config = function()
 			require("telescope").setup {
