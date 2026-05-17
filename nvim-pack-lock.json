@@ -1,0 +1,30 @@
+{
+  "plugins": {
+    "mini.ai": {
+      "rev": "bfb26d9072670c3aaefab0f53024b2f3729c8083",
+      "src": "https://github.com/nvim-mini/mini.ai",
+      "version": "'stable'"
+    },
+    "nvim-surround": {
+      "rev": "2e93e154de9ff326def6480a4358bfc149d5da2c",
+      "src": "https://github.com/kylechui/nvim-surround",
+      "version": "4.0.0 - 5.0.0"
+    },
+    "plenary.nvim": {
+      "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "telescope-ui-select.nvim": {
+      "rev": "6e51d7da30bd139a6950adf2a47fda6df9fa06d2",
+      "src": "https://github.com/nvim-telescope/telescope-ui-select.nvim"
+    },
+    "telescope-undo.nvim": {
+      "rev": "928d0c2dc9606e01e2cc547196f48d2eaecf58e5",
+      "src": "https://github.com/debugloop/telescope-undo.nvim"
+    },
+    "telescope.nvim": {
+      "rev": "7d324792b7943e4aa16ad007212e6acc6f9fe335",
+      "src": "https://github.com/nvim-telescope/telescope.nvim"
+    }
+  }
+}
