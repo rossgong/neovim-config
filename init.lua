@@ -32,6 +32,20 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+-- file manager
+-- Dependencies (does this need to be seperate?
+vim.pack.add({ 'https://github.com/nvim-tree/nvim-web-devicons' })
+vim.pack.add({ 'https://github.com/stevearc/oil.nvim' })
+
+require('oil').setup({
+	columns = { 'icon' },
+	view_options = {
+		show_hidden = true
+	}
+})
+
+vim.api.nvim_create_user_command('Ex', 'Oil .', {}) -- Ex alias
+
 -- LSP
 vim.o.autocomplete = true
 vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
@@ -56,7 +70,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(ev)
 		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
 		if client:supports_method('textDocument/completion') then
-			vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = true})
+			vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
 		end
 	end
 })
