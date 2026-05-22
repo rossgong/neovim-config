@@ -58,6 +58,11 @@ vim.o.pumheight = 8
 vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
 vim.lsp.enable('lua_ls')
 
+vim.lsp.config('bashls', {
+	filetypes = { 'bash', 'sh', 'zsh' }
+})
+vim.lsp.enable('bashls')
+
 vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
 vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "LSP GOTO Declaration" })
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "LSP GOTO Defintion" })
