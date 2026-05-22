@@ -32,6 +32,10 @@ vim.opt.updatetime = 50
 
 vim.opt.colorcolumn = "80"
 
+--ColorScheme
+vim.pack.add({ "https://github.com/rebelot/kanagawa.nvim" })
+vim.cmd.colorscheme("kanagawa-wave")
+
 -- file manager
 -- Dependencies (does this need to be seperate?
 vim.pack.add({ 'https://github.com/nvim-tree/nvim-web-devicons' })
@@ -121,5 +125,12 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live gr
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Telescope keymaps' })
 
-vim.pack.add({ "https://github.com/rebelot/kanagawa.nvim" })
-vim.cmd.colorscheme("kanagawa-wave")
+
+vim.pack.add({
+    "https://github.com/OXY2DEV/markview.nvim",
+})
+
+require("markview").setup({
+    -- preview = { enable = false } -- COnsider uncommenteing if annoying
+});
+
