@@ -33,27 +33,33 @@ vim.opt.updatetime = 50
 vim.opt.colorcolumn = "80"
 
 -- LSP
-vim.lsp.config['luals'] = {
-	cmd = { 'lua-language-server' },
-	filetypes = { 'lua' },
-	root_markers = { { '.luarc.json' }, '.git' },
-	settings = {}
-}
+vim.o.autocomplete = true
+vim.opt.completeopt = { 'menuone', 'noselect', 'popup' }
+vim.o.pumheight = 8
 
-vim.lsp.enable('luals')
+vim.pack.add({ 'https://github.com/neovim/nvim-lspconfig' })
+vim.lsp.enable('lua_ls')
 
-vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<cr>', { desc = "LSP Hover" })
-vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', { desc = "LSP GOTO Defintion" })
-vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<cr>', { desc = "LSP GOTO Declaration" })
-vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', { desc = "LSP GOTO Implementation" })
-vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<cr>', { desc = "LSP Type Definition" })
-vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', { desc = "LSP References" })
-vim.keymap.set('n', 'gs', '<cmd>lua vim.lsp.buf.signature_help()<cr>', { desc = "LSP Signature Doc" })
-vim.keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<cr>', { desc = "LSP Rename" })
+vim.keymap.set('n', '<F4>', vim.lsp.buf.code_action, { desc = "LSP Code Action" })
+vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, { desc = "LSP GOTO Declaration" })
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition, { desc = "LSP GOTO Defintion" })
+vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, { desc = "LSP GOTO Implementation" })
 vim.keymap.set('n', 'gl', vim.diagnostic.open_float, { desc = 'Show line diagnostics' })
-vim.keymap.set({ 'n', 'x' }, '<F3>', '<cmd>lua vim.lsp.buf.format({async = true})<cr>', { desc = "LSP Reformat" })
-vim.keymap.set('n', '<F4>', '<cmd>lua vim.lsp.buf.code_action()<cr>', { desc = "LSP Code Action" })
+vim.keymap.set('n', 'gn', vim.lsp.buf.rename, { desc = "LSP Rename" })
+vim.keymap.set('n', 'gr', vim.lsp.buf.references, { desc = "LSP References" })
+vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, { desc = "LSP Signature Doc" })
+vim.keymap.set('n', 'gt', vim.lsp.buf.type_definition, { desc = "LSP Type Definition" })
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, { desc = "LSP Hover" })
+vim.keymap.set({ 'n', 'x' }, '<F3>', function() vim.lsp.buf.format({ async = true }) end, { desc = "LSP Reformat" })
 
+vim.api.nvim_create_autocmd('LspAttach', {
+	callback = function(ev)
+		local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
+		if client:supports_method('textDocument/completion') then
+			vim.lsp.completion.enable(true, client.id, ev.buf, {autotrigger = true})
+		end
+	end
+})
 -- mini.ai setup
 vim.pack.add({ { src = 'https://github.com/nvim-mini/mini.ai', version = 'stable' } })
 local delimiters = { '|' }
@@ -95,9 +101,9 @@ require("telescope").load_extension("undo");
 
 
 local builtin = require('telescope.builtin')
+vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Telescope live grep' })
-vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = 'Telescope keymaps' })
 
